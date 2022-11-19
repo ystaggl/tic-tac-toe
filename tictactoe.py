@@ -6,9 +6,9 @@ class TicTacToeGame():
     Instance of a game of tic tac toe
     """
     def __init__(self):
-        self.current_player = 1
+        self.current_player = 1 #Controls which player's turn it is
         self.board = [0,0,0,0,0,0,0,0,0]
-        self.winner = None
+        self.winner = None #This is set later to decide the winner, it being None indicates a tie.
 
 
     def switch_player(self):
@@ -23,7 +23,8 @@ class TicTacToeGame():
 
     def is_over(self):
         """
-        Test if the game has been won
+        Test if the game is over.
+        Also sets self.winner to the last player to move in case of a win, or to None in case of a tie.
         """
         winstates = ([1,1,1],[2,2,2])
         self.winner = self.current_player
@@ -47,6 +48,8 @@ class TicTacToeGame():
             return True
 
         self.winner = None
+
+        #Test if all spaces on the board have been filled in without a win, indicating a tie.
         if all(self.board) != 0:
             return True
 
@@ -76,7 +79,7 @@ class TicTacToeGame():
         print("")
         move = input(f"Player {self.current_player} to move ")
 
-        #Ensure that the move is valid
+        #Return early 
         try:
             self.board[int(move)]
         except IndexError:
